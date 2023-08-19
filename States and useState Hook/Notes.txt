@@ -1,0 +1,128 @@
+State : 
+
+The state is a built-in React object...
+It is used to contain data or information about the component...
+Updation will happen overtime, whenever it changes, the component re-renders...
+
+syntax :
+
+const [name,setName] = useState("Use hooks!);
+
+props vs state
+
+props : passing data
+state : manage data
+
+Note : It will not on UI but increase the data...
+then use state for updation...
+Becoz it will render only once...
+
+import './App.css';
+function App() {
+  let age = 0;
+  const increaseAge = () => {
+    age = age + 1;
+    console.log(age);
+  }
+  return (
+    <div className = "App">
+      <h1>{age}</h1>
+      <button onClick={increaseAge}>Increase Age</button>
+    </div>
+  );
+}
+export default App;
+
+Correct program using State :
+
+import './App.css';
+import {useState} from 'react';
+function App() {
+  const [age, setAge] = useState(0);
+  const increaseAge = () => {
+    setAge(age + 1);
+  }
+  return (
+    <div className = "App">
+      <h1>{age}</h1>
+      <button onClick={increaseAge}>Increase Age</button>
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+import {useState} from 'react';
+function App() {
+  const [inputValue, setInputValue] = useState("");
+  const changeInput = (event) => {
+    //event is an argument, used to grab information from input...
+    console.log(event.target.value);
+    setInputValue(event.target.value);
+  }
+  return (
+    <div className = "App">
+      <input type="text" onChange={changeInput}/><br></br>
+      <h1>{inputValue}</h1>
+    </div>
+  );
+}
+export default App;
+
+problem Show or Hide data
+
+import './App.css';
+import {useState} from 'react';
+function App() {
+  const [showText, setShowText] = useState(true);
+  return (
+    <div className = "App">
+      <button onClick={() => {
+        setShowText(!showText)
+      }}>Show/Hide</button>
+      {showText && <h1>My name is Gana...</h1>}
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+import {useState} from 'react';
+function App() {
+  const [textColor, setTextColor] = useState("black");
+  return (
+    <div className = "App">
+      <button onClick={() => {
+        setTextColor(textColor === "black" ?"red" : "black")
+      }}>Show/Hide</button>
+       <h1 style={{color : textColor}}>My name is Gana...</h1>
+    </div>
+  );
+}
+export default App;
+
+
+import './App.css';
+import {useState} from 'react';
+function App() {
+  const [count, setCount] = useState(0);
+
+  const increase = () => {
+    setCount(count + 1);
+  }
+  const decrease = () => {
+    setCount(count - 1);
+  }
+  const setToZero = () => {
+    setCount(0);
+  }
+  return (
+    <div className = "App">
+      <button onClick={increase}>Increase</button><br></br><br></br>
+      <button onClick={decrease}>Decrease</button><br></br><br></br>
+      <button onClick={setToZero}>Set to Zero</button><br></br><br></br>
+      <h1>{count}</h1>
+    </div>
+  );
+}
+export default App;

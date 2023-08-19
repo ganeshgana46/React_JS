@@ -1,0 +1,153 @@
+Implementing CSS in React :
+
+EX :
+
+import styles from './App.module.css';
+function App() {
+  return (
+    <div className = {styles.App}>
+      <h1 className={styles.name}>Gana</h1>
+    </div>
+  );
+}
+export default App;
+
+Ternary Opeator :
+
+import './App.css';
+function App() {
+  const age = 19;
+  return (
+    <div className = "App">
+      {age >= 18 ? <h1>Eligible for Vote</h1> : <h1>Not Eligible for Vote</h1>}
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+function App() {
+  const isGreen = true;
+  return (
+    <div className = "App">
+      {<h1 style={{color : isGreen ? "green" : "red"}}>This is Color</h1>}
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+function App() {
+  const isGreen = false;
+  return (
+    <div className = "App">
+      {isGreen && <button>This is button</button>}
+    </div>
+  );
+}
+export default App;
+
+Lists in React (important) :
+
+In React, you will render lists with some type of loop.
+The JavaScript map() array method is generally the preferred method.
+
+import './App.css';
+function App() {
+  const names = ["Innocent","Joyboy","Rakesh","Joker","cruel"];
+  return (
+    <div className = "App">
+      {names.map((name,key) => {
+        return <h1 key={key}>{name}</h1>;
+      })}
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+function App() {
+  const users = [
+    {name:"Gana", age:21},
+    {name:"Rajesh", age:21},
+    {name:"Rakesh", age:21}
+  ];
+  return (
+    <div className = "App">
+      {users.map((user,key) => {
+        return <div>
+          {user.name} {user.age}
+        </div>
+      })}
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+function App() {
+  const users = [
+    {name:"Gana", age:21},
+    {name:"Rajesh", age:21},
+    {name:"Rakesh", age:21}
+  ];
+  return (
+    <div className = "App">
+      {users.map((user,key) => {
+        return <User name={user.name} age={user.age}/>
+      })}
+    </div>
+  );
+}
+//Put Component always in seperate file
+const User = (props) => {
+  return (
+    <div>{props.name}{props.age}</div>
+  );
+};
+export default App;
+
+import './App.css';
+import {User} from './User'
+function App() {
+  const planets = [
+    {name: "Mars", isGasPlanet: false},
+    {name: "Earth", isGasPlanet: false},
+    {name: "Jupiter", isGasPlanet: true},
+    {name: "Venus", isGasPlanet: false},
+    {name: "Neptune", isGasPlanet: true},
+    {name: "Uranus", isGasPlanet: true}
+  ];
+  return (
+    <div className = "App">
+      {planets.map((planet,key) =>{
+        if(!planet.isGasPlanet)
+        return <h1>{planet.name}</h1>
+      })}
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+import {User} from './User'
+function App() {
+  const planets = [
+    {name: "Mars", isGasPlanet: false},
+    {name: "Earth", isGasPlanet: false},
+    {name: "Jupiter", isGasPlanet: true},
+    {name: "Venus", isGasPlanet: false},
+    {name: "Neptune", isGasPlanet: true},
+    {name: "Uranus", isGasPlanet: true}
+  ];
+  return (
+    <div className = "App">
+      {planets.map((planet,key) =>
+      !planet.isGasPlanet && <h1>{planet.name}</h1>
+      )}
+    </div>
+  );
+}
+export default App;
+
+

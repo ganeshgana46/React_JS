@@ -1,0 +1,131 @@
+JSX : [JavaScript XML]
+
+JSX stands for JavaScript XML.
+JSX allows us to write HTML in React.
+JSX makes it easier to write and add HTML in React.
+
+JSX allows us to write HTML elements in JavaScript and place them in 
+the DOM without any createElement()  and/or appendChild() methods.
+
+Ex : 
+
+import './App.css';
+function App() {
+  const name = <h1>Gana</h1>;
+  const age = <h1>21</h1>;
+  const email = <h1>Pallamganesh213@gmail.com</h1>;
+  const user = (
+    <div>
+      {name}
+      {age}
+      {email}
+    </div>
+  )
+  return (
+    <div className = "App">
+      {user}
+      {user}
+      {user}
+    </div>
+  );
+}
+export default App;
+
+Components :
+
+Components are like functions that return HTML elements.
+
+const getName = () => {
+  return "Gana"
+};
+//This is JavaScript Function
+
+const GetNameComponent = () => {
+  return <h1>Gana</h1>
+};
+//This is React Component. Becoz We write here UI Staff...
+//Component name should be start with Capital...
+
+Components are independent and reusable bits of code.
+
+import './App.css';
+function App() {
+  return (
+    <div className = "App">
+      <User/>
+      <User/>
+      <User/>
+    </div>
+  );
+}
+const User = () =>{
+  return (
+    <div>
+      <h1>Gana</h1>
+      <h1>21</h1>
+      <h1>pallamganesh213@gmail.com</h1>
+    </div>
+  )
+}
+export default App;
+
+
+Two types :
+1.Class Components
+2.Function Components
+
+Props : [Properties]
+
+props is JS Object...
+React Props are like function arguments in JavaScript and attributes in HTML.
+Props are arguments passed into React components.
+Props are passed to components via HTML attributes.
+
+Ex :
+
+import './App.css';
+function App() {
+  return (
+    <div className = "App">
+      <User name="Gana" age={21} email="pallamganesh213@gmail.com"/>
+      <User name="Rajesh" age={21} email="rajesh213@gmail.com"/>
+      <User name="Rakesh" age={21} email="rakesh@gmail.com"/>
+    </div>
+  );
+}
+const User = (props) =>{
+  return (
+    <div>
+      <h1>{props.name}</h1>
+      <h1>{props.age}</h1>
+      <h1>{props.email}</h1>
+    </div>
+  )
+}
+export default App;
+
+Exercise : 
+
+import './App.css';
+function App() {
+  return (
+    <div className = "App">
+      <Job salary={900000} position="sofware Developer" company="Google"/>
+      <Job salary={1200000} position="DevOps Engineer" company="Amazon"/>
+      <Job salary={1000000} position="Tester" company="Netflix"/>
+    </div>
+  );
+}
+const Job = (props) => {
+  return (
+    <div>
+      <h1>{props.salary}</h1>
+      <h1>{props.position}</h1>
+      <h1>{props.company}</h1>
+    </div>
+  );
+}
+export default App;
+
+
+

@@ -1,0 +1,7 @@
+React SetUp :
+
+1.install npm(node package manager).
+2.install node Js.
+3.npx create-react-app "name of the project"
+4.cd "name of the project"
+5.npm start
