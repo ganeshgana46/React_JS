@@ -1,0 +1,111 @@
+Agenda : 
+
+1.Components Lifecycle
+2.useEffect Hook
+3.React StrictMode
+
+COMPONENT LIFECYCLE :
+
+Lifecycle of Components
+Each component in React has a lifecycle which you can monitor and manipulate during its three main phases.
+The three phases are: 
+-->Mounting
+-->Updating
+-->Unmounting
+
+MOUNTING :
+
+Mounting means putting elements into the DOM.
+
+UPDATING :
+
+The next phase in the lifecycle is when a component is updated.
+A component is updated whenever there is a change in the component's state or props.
+
+UNMOUNTING :
+
+The next phase in the lifecycle is when a component is removed from the DOM, or unmounting as React likes to call it.
+
+Example Problem :
+
+import { useState } from 'react';
+import './App.css';
+import {Text} from './Text';
+function App() {
+  const [showText,setShowText] = useState(false);
+  return (
+    <div className = "App">
+      <button onClick={()=> {
+        setShowText(!showText);
+      }}>Show Text</button>
+      {showText && <Text/>}
+    </div>
+  );
+}
+export default App;
+import React from 'react';
+import {useState} from 'react';
+export const Text = () => {
+    const [text,setText] = useState("");
+    return (
+        <div>
+            <input onChange={(event) => {
+                setText(event.target.value);
+            }}/>
+            <h1>{text}</h1>
+        </div>
+    )
+}
+
+useEffect Hooks :
+
+The useEffect Hook allows you to perform side effects in your components.
+Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+useEffect accepts two arguments. The second argument is optional.
+useEffect(<function>, <dependency>)....
+
+import { useState } from 'react';
+import './App.css';
+import {Text} from './Text';
+function App() {
+  const [showText,setShowText] = useState(false);
+  return (
+    <div className = "App">
+      <button onClick={()=> {
+        setShowText(!showText);
+      }}>Show Text</button>
+      {showText && <Text/>}
+    </div>
+  );
+}
+export default App;
+import React from 'react';
+import {useState, useEffect} from 'react';
+export const Text = () => {
+    const [text,setText] = useState("");
+    useEffect(() => {
+        console.log("COMPONENT MOUNTED");
+    
+        return () => {
+          console.log("COMPONENT UNMOUNTED");
+        };
+      }, []);
+    return (
+        <div>
+            <input onChange={(event) => {
+                setText(event.target.value);
+            }}/>
+            <h1>{text}</h1>
+        </div>
+    )
+}
+
+REACT STRICTMODE :
+
+<StrictMode> lets you find common bugs in your components early during development. 
+
+-->Enabling Strict Mode for entire app
+-->Enabling strict mode for a part of the app
+-->Fixing bugs found by double rendering in development
+-->Fixing bugs found by re-running Effects in development
+-->Fixing deprecation warnings enabled by Strict Mode

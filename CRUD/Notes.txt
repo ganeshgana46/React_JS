@@ -48,4 +48,263 @@ function App() {
 }
 export default App;
 
+DELETE TASKS :
 
+import './App.css';
+import {useState} from 'react'
+function App() {
+  const [todoList,setToDoList] = useState([]);
+  const [newTask,setNewTask] = useState("");
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+  const addTask = () => {
+    setToDoList([...todoList,newTask]);
+  };
+  const deleteTask = (taskName) => {
+    // const arr = ["Gana","Rajesh","Rakesh"];
+    // const newArr = arr.filter((name) => {
+    //   if (name === "Gana") {
+    //     return false;
+    //   }else {
+    //     return true;
+    //   }
+    // });
+
+    // const newToDoList = todoList.filter((task) => {
+    //   if(taskName === task){
+    //     return false;
+    //   }else {
+    //     return true;
+    //   }
+    // });
+
+    // const newToDoList = todoList.filter((task) => {
+    //   return task !== taskName;
+    // });
+
+    // const newToDoList = todoList.filter((task) => task !== taskName);
+    // setToDoList(newToDoList);
+    
+    setToDoList(todoList.filter((task) => task !== taskName));
+  };
+  return (
+    <div className = "App">
+      <div className="addTask">
+        <input onChange={handleChange}/>
+        <button onClick={addTask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((task)=> {
+          return (
+            <div>
+              <h1>{task}</h1>
+              <button onClick={() =>deleteTask(task)}>x</button>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  );
+}
+export default App;
+
+import './App.css';
+import { useState } from 'react';
+function App() {
+  const [todoList,SetToDoList] = useState([]);
+  const [newTask,setNewTask] = useState("");
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+  const addTask = () => {
+    SetToDoList([...todoList,newTask]);
+  };
+  const deleteTask = (taskName) => {
+    SetToDoList(todoList.filter((task) => task !== taskName));
+  }
+  return (
+    <div className = "App">
+      <div className="addTask">
+        <input onChange={handleChange}/>
+        <button onClick={addTask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((task) => {
+          return (
+            <div>
+              <h1>{task}</h1>
+              <button onClick={()=>deleteTask(task)}>x</button>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  );
+}
+export default App;
+Note : we have problem here if we have same task it will delete both...
+its not good...
+
+import './App.css';
+import { useState } from 'react';
+function App() {
+  const [todoList,SetToDoList] = useState([]);
+  const [newTask,setNewTask] = useState("");
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+  const addTask = () => {
+    const task = {
+      id : todoList.length === 0 ? 1 : todoList[todoList.length-1].id + 1,
+      taskName : newTask
+    };
+    SetToDoList([...todoList,task]);
+  };
+  const deleteTask = (id) => {
+    SetToDoList(todoList.filter((task) => task.id !== id));
+  }
+  return (
+    <div className = "App">
+      <div className="addTask">
+        <input onChange={handleChange}/>
+        <button onClick={addTask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((task) => {
+          return (
+            <div>
+              <h1>{task.taskName}</h1>
+              <button onClick={()=>deleteTask(task.id)}>x</button>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  );
+}
+export default App;
+
+USING COMPONENTS : 
+
+import { useState } from 'react';
+import {Task} from './Task';
+import './App.css';
+function App() {
+  const [todoList,setToDoList] = useState([]);
+  const [newTask,setNewTask] = useState("");
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+  const addTask = () => {
+    const task = {
+      id : todoList.length === 0 ? 1 : todoList[todoList.length-1].id + 1,
+      taskName : newTask
+    }
+    setToDoList([...todoList,task]);
+  }
+  const deleteTask = (id) => {
+    setToDoList(todoList.filter((task) => task.id !== id));
+  };
+  return (
+    <div className = "App">
+      <div className="addTask">
+        <input onChange={handleChange}/>
+        <button onClick={addTask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((task) => {
+          return (
+            <Task 
+            taskName={task.taskName} 
+            id={task.id} 
+            deleteTask={deleteTask}
+            />
+          )
+        })}
+      </div>
+    </div>
+  );
+}
+export default App;
+
+CRETE NEW FILE :
+
+export const Task = (props) => {
+    return (
+        <div>
+          <h1>{props.taskName}</h1>
+          <button onClick={()=>props.deleteTask(props.id)}>x</button>
+        </div>
+    );
+}
+
+UPDATION :
+
+import './App.css';
+import {useState} from 'react';
+import {Task} from './Task';
+function App() {
+  const [todoList,setToDoList] = useState([]);
+  const [newTask,setNewTask] = useState("");
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+  const addTask = () => {
+    const task = {
+      id : todoList.length===0 ? 1 : todoList[todoList.length-1].id + 1,
+      taskName : newTask,
+      completed : false
+    }
+    setToDoList([...todoList,task]);
+  };
+  const  deleteTask = (id) => {
+    setToDoList(todoList.filter((task) => task.id !== id));
+  };
+  const completeTask = (id) => {
+    setToDoList(
+      todoList.map((task) => {
+        if(task.id === id){
+          return {...task, completed: true};
+        }else{
+          return task;
+        }
+      })
+    );
+  };
+  return (
+    <div className = "App">
+      <div className="addTask">
+        <input onChange={handleChange}/>
+        <button onClick={addTask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((task) => {
+          return (
+          <Task 
+          taskName = {task.taskName}
+          id = {task.id}
+          completed = {task.completed}
+          deleteTask = {deleteTask}
+          completeTask = {completeTask}
+          />)
+        })}
+      </div>
+    </div>
+  );
+}
+export default App;
+
+CRETE NEW FILE :
+
+export const Task = (props) => {
+    return(
+        <div className="task"
+        style={{color : props.completed ? "green" : "black"}}
+        >
+           <h1>{props.taskName}</h1>
+           <button onClick={()=>props.completeTask(props.id)}> Complete </button>
+           <button onClick={()=>props.deleteTask(props.id)}>x</button>
+        </div>
+    )
+}

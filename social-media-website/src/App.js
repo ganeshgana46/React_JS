@@ -1,25 +1,22 @@
+import { useState } from 'react';
+import {Task} from './Task';
 import './App.css';
-import {useState} from 'react'
 function App() {
   const [todoList,setToDoList] = useState([]);
   const [newTask,setNewTask] = useState("");
-
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
-
   const addTask = () => {
-    // let arr = [];
-    // const name = "Gana";
-    // arr.push(name);
-    // const newToDoList = [...todoList,newTask];
-    // setToDoList(newToDoList);
-    //{That's property spread notation. It was added in ES2018 (spread for arrays/iterables was 
-    //earlier, ES2015), but it's been supported in React projects for a long time via transpilation 
-    //(as "JSX spread attributes" even though you could do it elsewhere, too, not just attributes).}
-    setToDoList([...todoList,newTask]);
-  };
-
+    const task = {
+      id : todoList.length === 0 ? 1 : todoList[todoList.length-1].id + 1,
+      taskName : newTask
+    }
+    setToDoList([...todoList,task]);
+  }
+  const deleteTask = (id) => {
+    setToDoList(todoList.filter((task) => task.id !== id));
+  }
   return (
     <div className = "App">
       <div className="addTask">
@@ -28,7 +25,13 @@ function App() {
       </div>
       <div className="list">
         {todoList.map((task) => {
-          return <h1>{task}</h1>
+          return (
+            <Task 
+            taskName={task.taskName} 
+            id={task.id} 
+            deleteTask={deleteTask}
+            />
+          )
         })}
       </div>
     </div>
