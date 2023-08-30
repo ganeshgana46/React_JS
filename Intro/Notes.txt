@@ -14,3 +14,19 @@ React creates a VIRTUAL DOM in memory.
 
 Instead of manipulating the browser's DOM directly, React creates a virtual DOM in memory, 
 where it does all the necessary manipulating, before making the changes in the browser DOM.
+
+Difference B/W Angular framework And React library ..?
+
+Angular and React are two different technologies for web development.14 Angular is a comprehensive 
+framework for building web applications, while React is a JavaScript library used to build user interfaces
+
+Difference B/W framework and library..?
+
+A framework is aset of pre-written code that provides a structure for developing software applications. A library, 
+on the other hand is collection of pre-written code that can be used to perform
+specific tasks...
+
+framework : they are controling the structure
+
+library : we can control the structure
+

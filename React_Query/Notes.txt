@@ -1,0 +1,66 @@
+React Query :
+
+React Query is a data-fetching and state management library for React
+applications that simplifies fetching, caching, and updating data...
+
+First install react Query
+
+command : npm install @tanstack/react-query
+
+import './App.css';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import { Home } from './Pages/Home';
+import { Profile } from './Pages/Profile';
+import { Contact } from './Pages/Contact';
+import { Navbar } from './Component';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+function App() {
+  const client = new QueryClient({defaultOptions : {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  }});
+  return (
+    <div className="App">
+      <QueryClientProvider client= {client}>
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/profile" element={<Profile />}/>
+          <Route path="/contact" element={<Contact />}/>
+        </Routes>
+      </Router>
+      </QueryClientProvider>
+    </div>
+  );
+}
+
+export default App;
+
+import { useQuery } from "@tanstack/react-query";
+import Axios from "axios";
+export const Home = () => {
+    const { 
+        data: catData, 
+        isLoading, 
+        isError, 
+        refetch 
+    } = useQuery(["cat"], () => {
+        return Axios.get("https://catfact.ninja/fact").then((res) => res.data);
+    });
+
+    if(isError){
+        return <h1> Sorry, there was an console.error; </h1>
+    }
+
+    if (isLoading){
+        return <h1> Loading... </h1>
+    }
+    return (
+    <h1>
+        This is the Home Page <p>{catData?.fact}</p>
+        <button onClick={refetch}>Update Data</button>
+    </h1>
+    );
+}

@@ -1,0 +1,93 @@
+What is State Management...?
+
+It is a process for managing the data that React comopnents need in order to render themselves...
+This data is typically stored in the  component's state object. when the state object changes, the 
+component will re-render itself. React state Management is basically half of a react app...
+
+const TopComponent = () => {
+    const [state, setState] = useState();
+    return (
+        <div>
+        <MiddleComponent state={state}/>
+        </div>
+    );
+};
+
+const MiddleComponent = (state) => {
+    return (
+        <div>
+          <BottomComponent state={state} />
+        </div>
+    );
+};
+
+const BottomComponent = (state) => {
+    return <div> {state} </div>
+}
+
+UseContext Hook :
+
+Context provides a way to pass data through the component tree without
+having to pass props down manually at every level.
+
+Example 1 :
+
+Without UseContext
+
+import './App.css';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import { Home } from './Pages/Home';
+import { Profile } from './Pages/Profile';
+import { Contact } from './Pages/Contact';
+import { Navbar } from './NavBar';
+import { useState } from 'react';
+function App() {
+  const [username, setUsername] = useState("PedroTech");
+  return (
+    <div className="App">
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={<Home username = {username}/>}/>
+          <Route path="/profile" element={<Profile username = {username} setUsername={setUsername}/>}/>
+          <Route path="/contact" element={<Contact />}/>
+        </Routes>
+      </Router>
+    </div>
+  );
+}
+export default App;
+
+export const Home = (props) => {
+    return <h1>This is the home page & User is : {props.username}</h1>
+}
+
+import { ChangeProfile } from "../Components/ChangeProfile"
+
+export const Profile = (props) => {
+    return <div>Profile & USer is : {props.username}
+    <ChangeProfile setUsername = {props.setUsername}/>
+    </div>
+}
+
+export const Contact = () => {
+    return <h1>This is the contact page</h1>
+}
+
+import { useState } from "react";
+
+export const ChangeProfile = (props) => {
+    const [newUsername, setNewUsername] = useState("");
+    return <div>
+        <input
+        onChange={(event) => {
+            setNewUsername(event.target.value);
+        }}/>
+        <button onClick={() => {
+            props.setUsername(newUsername);
+        }}>Change username</button>
+    </div>
+};
+
+Note : Problem is there here we use props everywhere it kind a clumsy
+so here the solution UseContext

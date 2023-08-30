@@ -1,0 +1,120 @@
+Agenda :
+
+Why do we need react-router-dom...?
+Installing react-router-dom
+Creating routes...
+
+React Router Dom is used to build single-page applications...
+i.e; applications that have many pages or components But "The Page Is Never Refreshed"...
+Instead the content is Dynamically fetched based on the  URL...
+This process is called Routing and it is made possible with the help of
+"React Router Dom"...
+
+-->install react-router-dom
+
+command : npm install react-router-dom
+
+Example :
+
+import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Home } from './Pages/Home';
+import { Contact } from './Pages/Contact';
+import { Menu } from './Pages/Menu';
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <div>
+          <Link to="/">Home</Link><br></br>
+          <Link to="/menu">Menu</Link><br></br>
+          <Link to="/contact">Contact</Link>
+        </div>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/menu" element={<Menu/>}/>
+          <Route path="/contact" element={<Contact/>}/>
+        </Routes>
+      </Router>    
+    </div>
+  );
+}
+export default App;
+
+Create Home.js file 
+
+export const Home = () => {
+    return <h1>This is the home page</h1>
+}
+
+Create Menu.js file
+
+export const Menu = () => {
+    return <h1>This is the menu page</h1>
+}
+
+Create Menu.js file
+
+export const Contact = () => {
+    return <h1>This is the contact page</h1>
+}
+
+UseNavigate :
+
+UseParams :
+
+
+import { useEffect, useState } from 'react';
+import './App.css';
+import Axios from 'axios';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Home } from './Pages/Home';
+import { Contact } from './Pages/Contact';
+import { Menu } from './Pages/Menu';
+import { Navbar } from './Pages/Navbar';
+function App() {
+  return (
+    <div className = "App">
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/contact" element={<Contact/>}/>
+          <Route path="/menu" element={<Menu/>}/>
+        </Routes>
+      </Router>
+    </div>
+  );
+}
+export default App;
+
+Navbar.js
+
+import {Link} from "react-router-dom";
+export const Navbar = () => {
+    return (
+        <div>
+           <Link to="/">Home</Link><br></br>
+           <Link to="/contact">Contact</Link><br></br>
+           <Link to="/menu">Menu</Link>
+        </div>
+    )
+}
+
+Home.js
+
+export const Home = () => {
+    return <h1>This Is My Home Page</h1>
+}
+
+Contact.js
+
+export const Contact = () => {
+    return <h1>This Is My Contact Page</h1>
+}
+
+Menu.js
+
+export const Menu = () => {
+    return <h1>This Is My Menu Page</h1>
+}
