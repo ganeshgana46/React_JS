@@ -3,7 +3,7 @@ React Query :
 React Query is a data-fetching and state management library for React
 applications that simplifies fetching, caching, and updating data...
 
-First install react Query
+First a fall install react Query
 
 command : npm install @tanstack/react-query
 

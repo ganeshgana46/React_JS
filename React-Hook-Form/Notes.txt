@@ -1,0 +1,90 @@
+React-Hook-Form and YUP :
+
+Agenda :
+
+1.Project Setup
+2.React Hook Form
+3.Validation with YUP
+
+install libraries :
+
+1.command : npm install react-hook-form yup
+
+import './App.css';
+import { Form } from './Form';
+function App() {
+  return (
+    <div className="App">
+      <Form/>
+    </div>
+  );
+}
+
+export default App;
+
+Form.js
+
+import { useForm } from "react-hook-form";
+export const Form = () => {
+    const {register, handleSubmit} = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+    }
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" placeholder="Full Name..." {...register("fullName")}/><br></br>
+            <input type="text" placeholder="Email..." {...register("email")}/><br></br>
+            <input type="text" placeholder="Age..." {...register("age")}/><br></br>
+            <input type="password" placeholder="password..." {...register("password")}/><br></br>
+            <input type="password" placeholder="confirm Password..." {...register("confirmPassword")}/><br></br>
+            <input type="submit"/>
+        </form>
+    )
+}
+
+command : npm install @hookform/resolvers
+
+import './App.css';
+import { Form } from './Form';
+function App() {
+  return (
+    <div className="App">
+      <Form/>
+    </div>
+  );
+}
+
+export default App;
+import { useForm } from "react-hook-form";
+import { Resolver, yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+export const Form = () => {
+    const {register, handleSubmit} = useForm({
+        resolver: yupResolver(schema),
+    });
+
+    const schema = yup.object().shape({
+        fullName : yup.string().required(),
+        email : yup.string().email().required(),
+        age : yup.number().positive().integer().min(18).required(),
+        password : yup.string().min(4).max(20).required(),
+        confirmPassword : yup.string().oneOf([yup.ref("password"),null]).required(),
+    });
+
+    const onSubmit = (data) => {
+        console.log(data);
+    }
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" placeholder="Full Name..." {...register("fullName")}/><br></br>
+            <input type="text" placeholder="Email..." {...register("email")}/><br></br>
+            <input type="number" placeholder="Age..." {...register("age")}/><br></br>
+            <input type="password" placeholder="password..." {...register("password")}/><br></br>
+            <input type="password" placeholder="confirm Password..." {...register("confirmPassword")}/><br></br>
+            <input type="submit"/>
+        </form>
+    )
+}
+
+Inclide Erros :
+
